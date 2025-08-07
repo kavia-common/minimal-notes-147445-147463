@@ -1,37 +1,409 @@
 /**
- * Ultralight template styles - minimal and clean
+ * Styles for Minimal Notes Qwik App
+ * Minimal light theme, accenting primary, secondary, accent.
+ * Sidebar, header, main content area.
  */
 
-.page-container {
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #64748b;
+  --accent-color: #f59e42;
+  --background-color: #fff;
+  --sidebar-bg: #f3f4f6;
+  --sidebar-width: 250px;
+  --header-height: 48px;
+  --danger: #e11d48;
+}
+
+.app-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  padding: 2rem;
+  background: var(--background-color);
 }
 
-.main-title {
-  font-size: 3rem;
-  font-weight: 300;
-  text-align: center;
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e5e7eb;
+  padding: 0;
+  min-width: 170px;
+  height: 100dvh;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1rem 1rem 1.25rem;
+  font-size: 1.07rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+.brand {
+  font-size: 1.33em;
+  font-weight: 700;
   color: var(--primary-color);
-  margin: 0;
+  letter-spacing: -0.04em;
+}
+.add-btn {
+  font-size: 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0.33em 0.6em;
+  cursor: pointer;
+  box-shadow: 0 1px 4px 0 rgba(59,130,246,0.10);
+  transition: background .2s;
+}
+.add-btn:hover {
+  background: var(--accent-color);
+  color: #333;
+}
+
+.search-input {
+  margin: 0 1rem 0.7rem 1.1rem;
+  padding: 0.37em 0.8em;
+  width: calc(100% - 2.3rem);
+  border-radius: 8px;
+  border: 1px solid #e0e4ed;
+  background: #fff;
+  font-size: 1em;
+  color: var(--secondary-color);
+}
+.search-input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.note-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+  padding-bottom: 1rem;
+}
+.note-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  background: none;
+  border: none;
+  border-left: 0.15rem solid transparent;
+  padding: 0.7rem 1rem 0.7rem 1.3rem;
+  cursor: pointer;
+  font-size: 1em;
+  color: var(--secondary-color);
+  transition: background .12s, border-color .15s;
+}
+.note-item:hover, 
+.note-item.selected {
+  background: #e0eaff;
+  border-left: 0.2rem solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.note-item-title {
+  font-weight: 600;
+  font-size: 1.08em;
+  margin-bottom: 0.12em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 93%;
+}
+.note-item-date {
+  font-size: 0.77em;
+  color: #a3a7b1;
+}
+
+.empty-list {
+  color: #c3c5cc;
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--background-color);
+}
+
+.app-header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem 0 1.2rem;
+  border-bottom: 1px solid #e6e9ed;
+  background: #fafbfb;
+  font-size: 1.14em;
+  font-weight: 500;
+  color: var(--primary-color);
   letter-spacing: -0.02em;
-  line-height: 1.2;
+}
+.app-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--primary-color);
 }
 
-@media (max-width: 768px) {
-  .main-title {
-    font-size: 2rem;
+.error-banner {
+  color: var(--danger);
+  background: #fbeaec;
+  border: 1px solid #fbb6ce;
+  padding: 0.6em 1em;
+  margin: 1.2em 1.5em 0.7em 1.5em;
+  border-radius: 7px;
+  font-size: 0.99em;
+}
+
+.main-panel {
+  flex: 1;
+  padding: 1.7rem min(6vw, 4rem) 2.6rem min(4vw,2.7rem);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.main-panel.blank {
+  align-items: center;
+  justify-content: center;
+  color: #bcbfc4;
+  font-size: 1.13em;
+  padding-top: 5em;
+}
+
+.note-form,
+article {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.title-input {
+  font-size: 1.3em;
+  font-weight: 600;
+  padding: 0.5em 0.6em;
+  margin-bottom: 0.7em;
+  border: 1px solid #e4e5eb;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--primary-color);
+}
+.content-input {
+  font-size: 1.01em;
+  font-family: inherit;
+  padding: 0.7em 0.7em 1.2em 0.7em;
+  height: 170px;
+  border: 1px solid #e4e5eb;
+  margin-bottom: 1em;
+  border-radius: 7px;
+  background: #fafbfc;
+}
+.edit-controls {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.primary-btn,
+.secondary-btn,
+.danger-btn,
+.edit-btn {
+  padding: 0.44em 1.18em;
+  font-size: 1em;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  background: #eaf2fc;
+  color: var(--primary-color);
+  margin-right: 0.14rem;
+  transition: background .15s;
+}
+.primary-btn {
+  background: var(--primary-color);
+  color: #fff;
+}
+.primary-btn:active,
+.primary-btn:hover {
+  background: #539bfa;
+}
+.secondary-btn {
+  background: #f3f5f8;
+  color: var(--secondary-color);
+}
+.secondary-btn:hover {
+  background: #d9e0ee;
+}
+.danger-btn {
+  background: #faf3f5;
+  color: var(--danger);
+}
+.danger-btn:hover {
+  background: #fbb6ce;
+  color: #fff;
+}
+.edit-btn {
+  background: #e5effd;
+  color: var(--primary-color);
+}
+.edit-btn:hover {
+  background: #539bfa;
+  color: #fff;
+}
+.main-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.9em;
+  gap: 1rem;
+}
+.note-title {
+  font-size: 1.44em;
+  margin: 0 0 0.18em 0;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.main-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8em;
+}
+
+.note-content {
+  font-size: 1.09em;
+  color: var(--secondary-color);
+  margin-bottom: 1.7em;
+  white-space: pre-line;
+}
+.note-updated {
+  text-align: right;
+  font-size: 0.82em;
+  color: #bcbfc4;
+}
+
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.55);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  border-radius: 10px;
+}
+.loader {
+  font-size: 1.2em;
+  color: var(--primary-color);
+  background: #f4faff;
+  padding: 1em 2em;
+  border-radius: 12px;
+  box-shadow: 0 1px 11px 0 rgba(59,130,246,0.07);
+}
+
+.hint {
+  text-align: center;
+  color: #babbbf;
+  margin-top: 6em;
+  font-size: 1.11em;
+}
+
+
+/* Responsive styles */
+@media (max-width: 800px) {
+  .sidebar {
+    width: 45vw;
+    min-width: 115px;
   }
-  
-  .page-container {
-    padding: 1rem;
+  .content-area {
+    padding-left: 0;
+  }
+  .main-panel {
+    padding: 1.7rem min(2vw, 0.7rem) 2.5rem min(1vw,0.3rem);
+  }
+  .note-form, article {
+    max-width: 98vw;
   }
 }
 
-@media (max-width: 480px) {
-  .main-title {
-    font-size: 1.5rem;
+@media (max-width: 600px) {
+  .app-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    flex-direction: row;
+    width: 100vw;
+    height: 3.7em;
+    min-width: unset;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    /* horizontal layout for mobile */
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0;
+  }
+  .sidebar-header {
+    padding: 0.4em 1em 0.4em 1em;
+    font-size: 1.06em;
+    flex: none;
+  }
+  .brand {
+    font-size: 1.05em;
+  }
+  .add-btn {
+    padding: 0.2em 0.8em;
+    font-size: 1.18em;
+  }
+  .search-input {
+    margin: 0 1em;
+    font-size: 0.95em;
+    width: 65vw;
+    min-width: 110px;
+    flex: none;
+  }
+  .note-list {
+    flex-direction: row;
+    flex: 1;
+    gap: 1px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0;
+    align-items: center;
+  }
+  .note-item {
+    padding: 0.5em 1em 0.5em 0.7em;
+    min-width: 90px;
+    font-size: 0.93em;
+    border-left: none;
+    border-bottom: 0.15rem solid transparent;
+    border-radius: 5px 5px 0 0;
+  }
+  .note-item.selected,
+  .note-item:hover {
+    background: #e0eaff;
+    border-bottom: 0.18rem solid var(--primary-color);
+    border-left: none;
+    color: var(--primary-color);
+  }
+  .note-item-title,
+  .note-item-date {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 7em;
+    white-space: nowrap;
+  }
+  .main-panel {
+    padding: 1.3em 0.3em 1.5em 0.2em;
   }
 }
+
